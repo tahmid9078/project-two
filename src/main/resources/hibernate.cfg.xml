@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+		<!-- properties for DB creds added in the HibernateUtil file through database.properties file -->
+		<property name="hibernate.connection.pool_size">5</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.hbm2ddl.auto">auto</property>
+		<property name="hibernate.current_session_context_class">thread</property>
+		
+		<!-- mappings for annotated classes -->
+        <mapping class="models.Account"/>
+        <mapping class="models.Role"/>
+        <mapping class="models.Review"/>
+        <mapping class="models.Omdb"/>
+        <mapping class="models.Ticket"/>
+        <mapping class="models.TicketType"/>
+        <mapping class="models.MovieShowTime"/>
+	</session-factory>
+</hibernate-configuration>
+
