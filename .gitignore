@@ -1,8 +1,12 @@
+target/
+
 # Compiled class file
 *.class
 
 # Log file
 *.log
+#cretentials for hibernate
+/src/main/resources/database.properties
 
 # BlueJ files
 *.ctxt

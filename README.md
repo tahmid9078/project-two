@@ -10,4 +10,10 @@ To setup the database credentials do the following:
 		hibernate.connection.username = YOUR_USERNAME
 		hibernate.connection.password = YOUR_PASSWORD
 
-	4. DONE! Now hou should be able to connect to your database.
+	4. DONE! Now you should be able to connect to your database.
+
+HOW TO USE:
+
+1. Clone the repository.
+2. Create e branch of your own and work on that branch.
+3. DO NOT MARGE TO MASTER.
