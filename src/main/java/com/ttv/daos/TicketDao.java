@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.ttv.models.Ticket;
 
-public interface ticketDao {
+public interface TicketDao {
 	public Ticket add(Ticket ticket);
 	public List<Ticket> findAll();
 	public Ticket findById(Long id);

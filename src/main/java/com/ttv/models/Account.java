@@ -20,7 +20,7 @@ public class Account {
 	@GeneratedValue(generator="a_seq", strategy=GenerationType.SEQUENCE)
 	private Long Id;
 	
-	@Column(name = "a_username")
+	@Column(name = "a_username", unique = true)
 	private String username;
 	
 	@Column(name = "a_password")
@@ -31,6 +31,9 @@ public class Account {
 	
 	@Column(name = "a_last_name")
 	private String lastName;
+	
+	@Column(name = "a_email")
+	private String email;
 	
 	@ManyToOne
 	@JoinColumn(name = "a_role")

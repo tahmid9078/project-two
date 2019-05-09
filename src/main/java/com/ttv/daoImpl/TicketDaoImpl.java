@@ -11,13 +11,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ttv.daos.ticketDao;
+import com.ttv.daos.TicketDao;
 import com.ttv.models.Ticket;
 
 @Repository
 @Transactional
 @EnableTransactionManagement
-public class TicketDaoImpl implements ticketDao {
+public class TicketDaoImpl implements TicketDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
