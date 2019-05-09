@@ -17,9 +17,9 @@
 	<!-- configure dataSource bean -->
 	<bean name="myDataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="url" value="${hibernate.connection.url}" />
-		<property name="username" value="${hibernate.connection.username}" />
-		<property name="password" value="${hibernate.connection.password}" />
+		<property name="url" value="jdbc:oracle:thin:@revaturedb.czefb1ltvn9b.us-east-2.rds.amazonaws.com:1521:ORCL" />
+		<property name="username" value="projectTwoTahmid" />
+		<property name="password" value="projectTwoTahmid123" />
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 	</bean>
 	<!-- configure session factory bean -->
