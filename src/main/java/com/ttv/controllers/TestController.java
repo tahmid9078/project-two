@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ttv.models.Account;
 import com.ttv.services.AccountService;
 
-@Controller
+@RestController
 @RequestMapping("/test")
 public class TestController {
 	
@@ -26,8 +26,4 @@ public class TestController {
 		return accountService.findAll();
 	}
 	
-	@RequestMapping(value="/hello", method=RequestMethod.GET)
-	public ResponseEntity<String> sayHello() {
-		return new ResponseEntity<>("Hello!", HttpStatus.OK);
-	}
 }

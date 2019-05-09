@@ -8,6 +8,6 @@ public interface TicketTypeDao {
 	public TicketType add(TicketType ticketType);
 	public List<TicketType> findAll();
 	public TicketType findById(Long id);
-	public Boolean update(TicketType ticketType);
-	public Boolean deleteById(Long id);
+	public void update(TicketType ticketType);
+	public void deleteById(Long id);
 }

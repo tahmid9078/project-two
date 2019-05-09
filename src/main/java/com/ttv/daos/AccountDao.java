@@ -8,6 +8,6 @@ public interface AccountDao {
 	public Account add(Account account);
 	public List<Account> findAll();
 	public Account findById(Long id);
-	public Boolean update(Account account);
-	public Boolean deleteById(Long id);
+	public void update(Account account);
+	public void deleteById(Long id);
 }

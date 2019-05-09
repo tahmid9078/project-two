@@ -15,7 +15,7 @@
 	<!-- properties file with database credentials -->
 	<context:property-placeholder location="classpath:database.properties"/>
 	<!-- configure dataSource bean -->
-	<bean id="myDataSource"
+	<bean name="myDataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="url" value="${hibernate.connection.url}" />
 		<property name="username" value="${hibernate.connection.username}" />
@@ -23,7 +23,7 @@
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 	</bean>
 	<!-- configure session factory bean -->
-	<bean id="sessionFactory"
+	<bean name="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="myDataSource" />
 		<property name="packagesToScan" value="com.ttv.models" />
@@ -37,9 +37,8 @@
 	</bean>
 	<!-- TransactionManager (Hibernate) -->
 	<!-- makes all session transactions -->
-	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+	<bean name="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	<tx:annotation-driven transaction-manager="myTransactionManager" />
 	
 </beans>

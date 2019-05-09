@@ -8,6 +8,6 @@ public interface TmdbDao {
 	public Tmdb add(Tmdb tmdb);
 	public List<Tmdb> findAll();
 	public Tmdb findById(Long id);
-	public Boolean update(Tmdb tmdb);
-	public Boolean deleteById(Long id);
+	public void update(Tmdb tmdb);
+	public void deleteById(Long id);
 }

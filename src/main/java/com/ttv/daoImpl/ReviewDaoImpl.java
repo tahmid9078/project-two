@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ttv.daos.ReviewDao;
@@ -15,101 +16,45 @@ import com.ttv.models.Review;
 
 @Repository
 @Transactional
+@EnableTransactionManagement
 public class ReviewDaoImpl implements ReviewDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+
 	@Override
 	public Review add(Review review) {
-		Session session = null;
-		Transaction transaction = null;
-		try {
-			session = sessionFactory.getCurrentSession();
-			transaction = session.beginTransaction();
-			session.save(review);
-			transaction.commit();
-
-		} catch (HibernateException e) {
-			if (session != null)
-				session.close();
-			if (transaction != null)
-				transaction.rollback();
-			e.printStackTrace();
-		}
+		Session session = sessionFactory.getCurrentSession();
+		session.save(review);
 		return review;
 	}
 
 	@Override
 	public List<Review> findAll() {
 		Session session = sessionFactory.getCurrentSession();
-		List<Review> reviews = null;
-
-		try {
-			session.beginTransaction();
-			reviews = session.createQuery("FROM Review").list();
-			session.getTransaction().commit();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			session.getTransaction().rollback();
-		} finally {
-			session.close();
-		}
+		List<Review> reviews = session.createQuery("FROM Review").list();
 		return reviews;
 	}
 
 	@Override
 	public Review findById(Long id) {
 		Session session = sessionFactory.getCurrentSession();
-		Review review = null;
-
-		try {
-			session.beginTransaction();
-			review = (Review) session.get(Review.class, id);
-			session.getTransaction().commit();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			session.getTransaction().rollback();
-		} finally {
-			session.close();
-		}
+		Review review = (Review) session.get(Review.class, id);
 		return review;
 	}
 
 	@Override
-	public Boolean update(Review review) {
+	public void update(Review review) {
 		Session session = sessionFactory.getCurrentSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			session.update(review);
-			tx.commit();
-			return true;
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			tx.rollback();
-			return false;
-		} finally {
-			session.close();
-		}
+		session.update(review);
 
 	}
 
 	@Override
-	public Boolean deleteById(Long id) {
+	public void deleteById(Long id) {
 		Session session = sessionFactory.getCurrentSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			session.delete(session.get(Review.class, id));
-			tx.commit();
-			return true;
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			tx.rollback();
-			return false;
-		} finally {
-			session.close();
-		}
+		session.delete(session.get(Review.class, id));
+
 	}
 
 }

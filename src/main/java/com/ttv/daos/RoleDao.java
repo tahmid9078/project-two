@@ -8,6 +8,6 @@ public interface RoleDao {
 	public Role add(Role role);
 	public List<Role> findAll();
 	public Role findById(Long id);
-	public Boolean update(Role role);
-	public Boolean deleteById(Long id);
+	public void update(Role role);
+	public void deleteById(Long id);
 }
