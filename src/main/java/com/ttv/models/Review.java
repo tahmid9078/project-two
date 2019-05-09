@@ -1,9 +1,10 @@
-package models;
+package com.ttv.models;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
@@ -16,11 +17,11 @@ public class Review {
 	private Long Id;
 	
 	@ManyToOne
-	@Column(name = "re_account")
+	@JoinColumn(name = "re_account")
 	private Account account;
 	
 	@ManyToOne
-	@Column(name = "re_movie")
+	@JoinColumn(name = "re_movie")
 	private Tmdb movie;
 	
 	@Column(name = "re_review")

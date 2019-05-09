@@ -1,4 +1,4 @@
-package models;
+package com.ttv.models;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;

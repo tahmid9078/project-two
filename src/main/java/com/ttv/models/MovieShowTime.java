@@ -1,4 +1,4 @@
-package models;
+package com.ttv.models;
 
 import java.util.Date;
 
@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
@@ -18,7 +19,7 @@ public class MovieShowTime {
 	private Long Id;
 	
 	@ManyToOne
-	@Column(name = "st_movie")
+	@JoinColumn(name = "st_movie")
 	private Tmdb movie;
 	
 	@Column(name = "st_movie_time")

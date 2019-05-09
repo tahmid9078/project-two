@@ -1,10 +1,11 @@
-package models;
+package com.ttv.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -32,7 +33,7 @@ public class Account {
 	private String lastName;
 	
 	@ManyToOne
-	@Column(name = "a_role")
+	@JoinColumn(name = "a_role")
 	private Role role;
 	
 	public Account() {

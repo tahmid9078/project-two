@@ -1,9 +1,10 @@
-package models;
+package com.ttv.models;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
@@ -16,12 +17,12 @@ public class Ticket {
 	private Long Id;
 	
 	@ManyToOne
-	@Column(name = "t_account")
+	@JoinColumn(name = "t_account")
 	private Account account;
 	
-	//CHANGED THIS relationship from what (1:N) needs to clarify
+	
 	@ManyToOne
-	@Column(name = "t_movie_showtime")
+	@JoinColumn(name = "t_movie_showtime")
 	private MovieShowTime movieShowTime;
 	
 	@Column(name = "t_payment_card_number")
@@ -31,7 +32,7 @@ public class Ticket {
 	private String status;
 	
 	@ManyToOne
-	@Column(name = "t_ticket_type")
+	@JoinColumn(name = "t_ticket_type")
 	private TicketType ticketType;
 	
 	public Ticket() {
