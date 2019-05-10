@@ -41,11 +41,11 @@ public class AccountTest {
 //		assertNotNull(i);
 //	}
 	
-//	@Test
-//	public void getAllAccounts() {
-//		List<Account> aList = as.findAll();
-//		assertNotNull(aList);
-//	}
+	@Test
+	public void getAllAccounts() {
+		List<Account> aList = as.findAll();
+		assertNotNull(aList);
+	}
 //	
 //	@Test 
 //	public void findByIdTrue() { 
