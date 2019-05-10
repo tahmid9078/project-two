@@ -19,6 +19,9 @@ public class Tmdb {
 	@Column(name = "tm_movie_api_id")
 	private String movieApiId;
 	
+	@Column(name = "tm_movie_status")
+	private String movieStatus;
+	
 	public Tmdb() {
 	}
 

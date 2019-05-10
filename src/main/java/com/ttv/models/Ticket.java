@@ -19,8 +19,7 @@ public class Ticket {
 	@ManyToOne
 	@JoinColumn(name = "t_account")
 	private Account account;
-	
-	
+		
 	@ManyToOne
 	@JoinColumn(name = "t_movie_showtime")
 	private MovieShowTime movieShowTime;
@@ -30,6 +29,9 @@ public class Ticket {
 	
 	@Column(name = "t_status")
 	private String status;
+	
+	@Column(name = "t_seat_number")
+	private String seatNumber;
 	
 	@ManyToOne
 	@JoinColumn(name = "t_ticket_type")
