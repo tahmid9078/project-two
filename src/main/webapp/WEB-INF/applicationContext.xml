@@ -13,7 +13,7 @@
 	<!-- Use annotations for MVC -->
 	<mvc:annotation-driven />
 	<!-- properties file with database credentials -->
-	<context:property-placeholder location="classpath:database.properties"/>
+	<!-- <context:property-placeholder location="classpath:database.properties"/> -->
 	<!-- configure dataSource bean -->
 	<bean name="myDataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
