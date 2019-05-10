@@ -33,8 +33,11 @@ public class AccountController {
 	}
 	
 	@PostMapping("/login") 
-	public Map<String, Boolean> verifyAccount(@RequestBody Account account) {
-		return Collections.singletonMap("success", accountService.verifyAccount(account));	
+	public Account verifyAccount(@RequestBody Account account) {
+		if(accountService.verifyAccount(account) == true) {
+			return accountService.findByUsername(account.getUsername());
+		}
+		return new Account();	
 	}
 
 }

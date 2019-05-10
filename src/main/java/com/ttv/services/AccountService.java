@@ -66,7 +66,6 @@ public class AccountService {
 	public boolean verifyRegistration(Account account) {
 		List<Account> aList = accountDao.findAll();
 		for(Account a : aList) {
-			System.out.println(a.getUsername() + "    " + account.getUsername());
 			if(account.getUsername().equals(a.getUsername())) {
 				System.out.println("equals");
 				return false;
@@ -74,6 +73,16 @@ public class AccountService {
 		}
 		System.out.println("no match");
 		return true;
+	}
+	
+	public Account findByUsername(String username) {
+		List<Account> aList = accountDao.findAll();
+		for(Account a : aList) {
+			if(a.getUsername().equals(username)) {
+				return a;
+			}
+		}
+		return null;
 	}
 
 }
