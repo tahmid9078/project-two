@@ -41,36 +41,36 @@ public class AccountTest {
 //		assertNotNull(i);
 //	}
 	
-	@Test
-	public void getAllAccounts() {
-		List<Account> aList = as.findAll();
-		assertNotNull(aList);
-	}
+//	@Test
+//	public void getAllAccounts() {
+//		List<Account> aList = as.findAll();
+//		assertNotNull(aList);
+//	}
+//	
+//	@Test 
+//	public void findByIdTrue() { 
+//		assertNotNull(as.findById((long)150));
+//	}
+//	@Test
+//	public void findByIdFalse() {
+//		assertNull(as.findById((long)1234567));
+//	}
 	
-	@Test 
-	public void findByIdTrue() { 
-		assertNotNull(as.findById((long)150));
-	}
-	@Test
-	public void findByIdFalse() {
-		assertNull(as.findById((long)1234567));
-	}
+//	@Test
+//	public void update() throws NoSuchAlgorithmException, NoSuchProviderException { 
+//		//updating firstname from test2F to test2Fname
+//		long id = 1;
+//		Role r = new Role(id, rs.findById(id).getRoleName());
+//		Account a = new Account((long)2100, "test2", "password", "test2Fname", "test2Last","test2@gmail.com", r);
+//		as.update(a);
+//		assertEquals(a.getEmail(), as.findById((long) 2100).getEmail());
+//	}
 	
-	@Test
-	public void update() throws NoSuchAlgorithmException, NoSuchProviderException { 
-		//updating firstname from test2F to test2Fname
-		long id = 1;
-		Role r = new Role(id, rs.findById(id).getRoleName());
-		Account a = new Account((long)2100, "test2", "password", "test2Fname", "test2Last","test2@gmail.com", r);
-		as.update(a);
-		assertEquals(a.getEmail(), as.findById((long) 2100).getEmail());
-	}
-	
-	@Test
-	public void delete() {
-		as.deleteById((long)2100);
-	}
-	
+//	@Test
+//	public void delete() {
+//		as.deleteById((long)2100);
+//	}
+//	
 	
 
 }
