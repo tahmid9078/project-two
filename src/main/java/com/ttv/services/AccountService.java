@@ -64,13 +64,15 @@ public class AccountService {
 		return false;
 	}
 	public boolean verifyRegistration(Account account) {
-		
 		List<Account> aList = accountDao.findAll();
 		for(Account a : aList) {
-			if((account.getUsername() == a.getUsername())) {
+			System.out.println(a.getUsername() + "    " + account.getUsername());
+			if(account.getUsername().equals(a.getUsername())) {
+				System.out.println("equals");
 				return false;
 			}
 		}
+		System.out.println("no match");
 		return true;
 	}
 

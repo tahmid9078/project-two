@@ -25,7 +25,7 @@ public class AccountController {
 
 	@PostMapping("")
 	public Map<String, Boolean> insertAccount(@RequestBody Account account) {
-		if(!accountService.verifyRegistration(account)) {
+		if(accountService.verifyRegistration(account) != false) {
 			accountService.add(account);
 			return Collections.singletonMap("success", true);
 		} 
