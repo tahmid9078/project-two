@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +14,7 @@ import com.ttv.models.Account;
 import com.ttv.services.AccountService;
 import com.ttv.services.RoleService;
 
-import javassist.NotFoundException;
-
+@CrossOrigin(origins = "*", allowedHeaders="*")
 @RestController
 @RequestMapping("/account")
 public class AccountController {
@@ -29,8 +29,12 @@ public class AccountController {
 			accountService.add(account);
 			return Collections.singletonMap("success", true);
 		} 
-		return Collections.singletonMap("success", false);
-		
+		return Collections.singletonMap("success", false);	
+	}
+	
+	@PostMapping("/login") 
+	public Map<String, Boolean> verifyAccount(@RequestBody Account account) {
+		return Collections.singletonMap("success", accountService.verifyAccount(account));	
 	}
 
 }

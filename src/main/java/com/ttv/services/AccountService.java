@@ -53,11 +53,12 @@ public class AccountService {
 		accountDao.deleteById(id);
 	}
 	
-	public boolean verifyAccount(String username, String password) {
+	public boolean verifyAccount(Account account) {
 		List<Account> aList = accountDao.findAll();
+		System.out.println(account);
 		for(Account a : aList) {
-			if((username == a.getUsername()) && (getSecurePassword(password) == a.getPassword())) {
-				return true;
+			if((account.getUsername().equals(a.getUsername())) && (getSecurePassword(account.getPassword()).equals(a.getPassword()))) {
+				return true;	
 			}
 		}
 		return false;

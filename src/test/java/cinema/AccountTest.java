@@ -25,52 +25,52 @@ import com.ttv.services.RoleService;
 //@ContextConfiguration("file:src/main/webapp/WEB-INF/applicationContext.xml")
 public class AccountTest {
 
-//	@Autowired
-//	AccountService as;
-//	
-//	@Autowired
-//	RoleService rs;
+	@Autowired
+	AccountService as;
 	
-//	@Test	
-//	public void addAccount() throws NoSuchAlgorithmException, NoSuchProviderException{
-//		long id = 1;
-//		Long i = null;
-//		Role r = new Role(id, rs.findById(id).getRoleName());
-//		i = as.add(new Account((long)2100, "test2", "password", "test2F", "test2L","test2@gmail.com", r));
-//	
-//		assertNotNull(i);
-//	}
+	@Autowired
+	RoleService rs;
 	
-//	@Test
-//	public void getAllAccounts() {
-//		List<Account> aList = as.findAll();
-//		assertNotNull(aList);
-//	}
-//	
-//	@Test 
-//	public void findByIdTrue() { 
-//		assertNotNull(as.findById((long)150));
-//	}
-//	@Test
-//	public void findByIdFalse() {
-//		assertNull(as.findById((long)1234567));
-//	}
+	@Test	
+	public void addAccount() throws NoSuchAlgorithmException, NoSuchProviderException{
+		long id = 1;
+		Long i = null;
+		Role r = new Role(id, rs.findById(id).getRoleName());
+		i = as.add(new Account((long)2100, "test2", "password", "test2F", "test2L","test2@gmail.com", r));
 	
-//	@Test
-//	public void update() throws NoSuchAlgorithmException, NoSuchProviderException { 
-//		//updating firstname from test2F to test2Fname
-//		long id = 1;
-//		Role r = new Role(id, rs.findById(id).getRoleName());
-//		Account a = new Account((long)2100, "test2", "password", "test2Fname", "test2Last","test2@gmail.com", r);
-//		as.update(a);
-//		assertEquals(a.getEmail(), as.findById((long) 2100).getEmail());
-//	}
+		assertNotNull(i);
+	}
 	
-//	@Test
-//	public void delete() {
-//		as.deleteById((long)2100);
-//	}
-//	
+	@Test
+	public void getAllAccounts() {
+		List<Account> aList = as.findAll();
+		assertNotNull(aList);
+	}
+	
+	@Test 
+	public void findByIdTrue() { 
+		assertNotNull(as.findById((long)150));
+	}
+	@Test
+	public void findByIdFalse() {
+		assertNull(as.findById((long)1234567));
+	}
+	
+	@Test
+	public void update() throws NoSuchAlgorithmException, NoSuchProviderException { 
+		//updating firstname from test2F to test2Fname
+		long id = 1;
+		Role r = new Role(id, rs.findById(id).getRoleName());
+		Account a = new Account((long)2100, "test2", "password", "test2Fname", "test2Last","test2@gmail.com", r);
+		as.update(a);
+		assertEquals(a.getEmail(), as.findById((long) 2100).getEmail());
+	}
+	
+	@Test
+	public void delete() {
+		as.deleteById((long)2100);
+	}
+	
 	
 
 }
