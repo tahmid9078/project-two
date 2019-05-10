@@ -38,27 +38,31 @@ public class Account {
 	@ManyToOne
 	@JoinColumn(name = "a_role")
 	private Role role;
-	
+
 	public Account() {
-	
-	}
-
-	public Account(String username, String password, String firstName, String lastName, Role role) {
 		super();
-		this.username = username;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.role = role;
+		// TODO Auto-generated constructor stub
 	}
 
-	public Account(Long id, String username, String password, String firstName, String lastName, Role role) {
+	public Account(Long id, String username, String password, String firstName, String lastName, String email,
+			Role role) {
 		super();
 		Id = id;
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.email = email;
+		this.role = role;
+	}
+
+	public Account(String username, String password, String firstName, String lastName, String email, Role role) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
 		this.role = role;
 	}
 
@@ -102,6 +106,14 @@ public class Account {
 		this.lastName = lastName;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public Role getRole() {
 		return role;
 	}
@@ -113,8 +125,12 @@ public class Account {
 	@Override
 	public String toString() {
 		return "Account [Id=" + Id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", role=" + role + "]";
+				+ ", lastName=" + lastName + ", email=" + email + ", role=" + role + "]";
 	}
+	
+	
+
+	
 	
 	
 
