@@ -12,16 +12,23 @@ import org.springframework.stereotype.Service;
 
 import com.ttv.daos.AccountDao;
 import com.ttv.models.Account;
+import com.ttv.models.Role;
 
 @Service
 public class AccountService {
 
 	@Autowired
 	private AccountDao accountDao;
+	@Autowired
+	private RoleService roleService;
 
-	public Long add(Account account) throws NoSuchAlgorithmException, NoSuchProviderException {
+	public Long add(Account account) {
 		String encryptedPW = getSecurePassword(account.getPassword());
 		account.setPassword(encryptedPW);
+		Role role = roleService.findById((long)1);
+		System.out.println("Role is : " + role);
+		account.setRole(role);
+		System.out.println("account in service : " + account);
 		return accountDao.add(account);
 	}
 
@@ -54,6 +61,16 @@ public class AccountService {
 			}
 		}
 		return false;
+	}
+	public boolean verifyRegistration(Account account) {
+		
+		List<Account> aList = accountDao.findAll();
+		for(Account a : aList) {
+			if((account.getUsername() == a.getUsername())) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 }
