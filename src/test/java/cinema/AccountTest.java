@@ -21,15 +21,15 @@ import com.ttv.models.Role;
 import com.ttv.services.AccountService;
 import com.ttv.services.RoleService;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/webapp/WEB-INF/applicationContext.xml")
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration("file:src/main/webapp/WEB-INF/applicationContext.xml")
 public class AccountTest {
 
-	@Autowired
-	AccountService as;
-	
-	@Autowired
-	RoleService rs;
+//	@Autowired
+//	AccountService as;
+//	
+//	@Autowired
+//	RoleService rs;
 	
 //	@Test	
 //	public void addAccount() throws NoSuchAlgorithmException, NoSuchProviderException{
@@ -41,11 +41,11 @@ public class AccountTest {
 //		assertNotNull(i);
 //	}
 	
-	@Test
-	public void getAllAccounts() {
-		List<Account> aList = as.findAll();
-		assertNotNull(aList);
-	}
+//	@Test
+//	public void getAllAccounts() {
+//		List<Account> aList = as.findAll();
+//		assertNotNull(aList);
+//	}
 //	
 //	@Test 
 //	public void findByIdTrue() { 
