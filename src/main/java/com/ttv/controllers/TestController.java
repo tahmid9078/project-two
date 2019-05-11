@@ -24,20 +24,9 @@ public class TestController {
 	@Autowired
 	private RoleService roleService;
 	
-	@GetMapping("/accounts")
-	public List<Account> getAllAccount() {
-		return accountService.findAll();
+	@GetMapping("")
+	public String test() {
+		return ".................";
 	}
 	
-//	@PostMapping(path = "/account")
-//	public String addAccount(@RequestBody Account account ) {
-//		account.setRole(roleService.findById((long)50));
-//		accountService.add(account);
-//		return "Ok";
-//	}
-//	@PostMapping(path = "/role")
-//	public String addAccount(@RequestBody Role role ) {
-//		roleService.add(role);
-//		return "ok";
-//	}
 }

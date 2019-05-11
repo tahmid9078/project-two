@@ -1,5 +1,6 @@
 package com.ttv.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,17 @@ public class ReviewService {
 	public List<Review> findAll() {
 		return reviewDao.findAll();
 	}
-
+	
+	public List<Review> findAllByMovieId(long movie_id) {
+		List<Review> reviews = new ArrayList<>();
+		for(Review review : reviewDao.findAll()) {
+			if(review.getMovie().equals(movie_id)) {
+				reviews.add(review);
+			}
+		}
+		return reviews;
+	}
+	
 	public Review findById(Long id) {
 		return reviewDao.findById(id);
 	}
