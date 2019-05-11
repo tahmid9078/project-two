@@ -40,12 +40,10 @@ public class AccountService {
 		return accountDao.findById(id);
 	}
 
-	public void update(Account account) throws NoSuchAlgorithmException, NoSuchProviderException {
+	public void update(Account account) {
 		Account a = accountDao.findById(account.getId()); //get the id
 		account.setPassword(a.getPassword()); //makesure the pw is updated so the encrypted one does not get replaced
-
 		System.out.println("the pw " + getSecurePassword("password") + "\nDB pw " + account.getPassword());
-		
 		accountDao.update(account);
 	}
 
