@@ -32,5 +32,10 @@ public class TmdbService {
 	public void deleteById(Long id) {
 		tmdbDao.deleteById(id);
 	}
+	
+	public Boolean verify(Tmdb tmdb) {
+		Boolean verify = (tmdb.getMovieApiId() != null)? true: false;
+		return verify;
+	}
 
 }
