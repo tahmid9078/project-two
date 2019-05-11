@@ -33,4 +33,5 @@ public class MovieShowTimeService {
 	public void deleteById(Long id) {
 		movieShowTimeDao.deleteById(id);
 	}
+	
 }

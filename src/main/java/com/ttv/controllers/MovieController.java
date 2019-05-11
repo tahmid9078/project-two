@@ -6,7 +6,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +20,7 @@ import com.ttv.services.TmdbService;
 @CrossOrigin(origins = "*", allowedHeaders="*")
 @RestController
 @RequestMapping("/movie")
-public class TmdbController {
+public class MovieController {
 	
 	@Autowired
 	TmdbService tmdbService;
@@ -26,6 +28,11 @@ public class TmdbController {
 	@GetMapping("/all")
 	public List<Tmdb> getAllMovies() {
 		return tmdbService.findAll();
+	}
+	
+	@GetMapping("/{id}")
+	public Tmdb getMovieById(@PathVariable Long id) {
+		return tmdbService.findById(id);
 	}
 	
 	@PostMapping("")
@@ -36,5 +43,12 @@ public class TmdbController {
 		}
 		return Collections.singletonMap("success", false);
 	}
+	
+	@DeleteMapping("/delete/{id}")
+	public Map<String, Boolean> deleteMovieById(@PathVariable Long id) {
+		tmdbService.deleteById(id);
+		return Collections.singletonMap("Success", true);
+	}
+	
 
 }
