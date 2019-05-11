@@ -27,7 +27,7 @@ public class AccountController {
 	@Autowired
 	RoleService roleService;
 	
-	@GetMapping("")
+	@GetMapping("/all")
 	public List<Account> getAllAccounts(){
 		return accountService.findAll();
 	}
