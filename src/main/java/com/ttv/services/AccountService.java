@@ -26,9 +26,7 @@ public class AccountService {
 		String encryptedPW = getSecurePassword(account.getPassword());
 		account.setPassword(encryptedPW);
 		Role role = roleService.findById((long)1);
-		System.out.println("Role is : " + role);
 		account.setRole(role);
-		System.out.println("account in service : " + account);
 		return accountDao.add(account);
 	}
 

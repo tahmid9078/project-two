@@ -1,30 +1,120 @@
 package cinema;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static util.PasswordHashing.*;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.when;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.ttv.daos.AccountDao;
 import com.ttv.models.Account;
 import com.ttv.models.Role;
 import com.ttv.services.AccountService;
 import com.ttv.services.RoleService;
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration("file:src/main/webapp/WEB-INF/applicationContext.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:testApplicationContext.xml")
 public class AccountTest {
-
+	
+	List<Account> mockAccounts;
+	Account mockAccount;
+	
+	@InjectMocks
+	private AccountService accountService;
+	
+	@Mock
+	private AccountDao accountDao;
+	
+	@Mock
+	private RoleService roleSerivce;
+	
+	@Before
+	public void setUp() {
+		MockitoAnnotations.initMocks(this);
+		mockAccounts = getDummyAccounts();
+		mockAccount = getDummyAccount();
+	}
+	
+	
+	@Test
+	public void testFindAllAccounts() {
+		when(accountService.findAll()).thenReturn(mockAccounts);
+		List<Account> accounts = accountService.findAll();
+		assertEquals(3, accounts.size());
+	}
+	
+	@Test
+	public void testAddAccount() {
+		Account mock = new Account((long)2, "username", "password", "firstName", "lastName", "email", null);
+		when(accountService.add(mock)).thenReturn(mock.getId());
+		long id = accountService.add(mock);
+		assertEquals((long) 2, id);
+	}
+	
+	@Test
+	public void testFindAccountById() {
+		Account a2 = new Account((long)2, "username2", "password2", "firstName2", "lastName2", "email2", new Role((long)2 , "role2"));
+		when(accountService.findById((long)2)).thenReturn(a2);
+		Account account = accountService.findById((long)2);
+		assertEquals((long) 2, (long) account.getId());
+	}
+	
+	@Test
+	public void testUpdateAccount() {
+		Account a2 = new Account((long)2, "usernameUpdate", "password2", "firstName2", "lastName2", "email2", new Role((long)2 , "role2"));
+		doAnswer((i) ->{
+			Account a = i.getArgument(0);
+			assertTrue("usernameUpdate".equals(a.getUsername()));
+			return null;
+		}).when(accountDao).update(a2);
+	}
+	
+	@Test
+	public void testDeleteAccount() {
+		
+		Account deleteAccount = mockAccounts.get(1);
+		doAnswer((i) ->{
+			Account a = accountService.findById(i.getArgument(0));
+			assertNull(a);
+			return null;
+		}).when(accountDao).deleteById(deleteAccount.getId());
+	}
+	
+	
+	private List<Account> getDummyAccounts() {
+		Account a1 = new Account((long)1, "username1", "password1", "firstName1", "lastName1", "email1", new Role((long)1 , "role1"));
+		Account a2 = new Account((long)2, "username2", "password2", "firstName2", "lastName2", "email2", new Role((long)2 , "role2"));
+		Account a3 = new Account((long)3, "username3", "password3", "firstName3", "lastName3", "email3", new Role((long)3 , "role3"));
+		List<Account> accounts = new ArrayList<>();
+		accounts.add(a1);
+		accounts.add(a2);
+		accounts.add(a3);
+		return accounts;
+	}
+	
+	private Account getDummyAccount() {
+		Account a = new Account((long)1, "username", "password", "firstName", "lastName", "email", new Role((long)1 ,"role1"));
+		return a;
+	}
+	
+	
+	
+	
+	
 //	@Autowired
 //	AccountService as;
 //	
