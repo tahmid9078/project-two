@@ -3,6 +3,7 @@ package com.ttv.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import com.ttv.models.Role;
 import com.ttv.services.AccountService;
 import com.ttv.services.RoleService;
 
+@CrossOrigin()
 @RestController
 @RequestMapping("/test")
 public class TestController {
