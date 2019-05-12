@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -80,6 +81,7 @@ public class AccountServiceTest {
 			assertTrue("usernameUpdate".equals(a.getUsername()));
 			return null;
 		}).when(accountDao).update(a2);
+		
 	}
 	
 	@Test

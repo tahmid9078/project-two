@@ -40,6 +40,7 @@ public class AccountService {
 
 	public void update(Account account) {
 		Account a = accountDao.findById(account.getId()); //get the id
+		System.out.println(a);
 		account.setPassword(a.getPassword()); //makesure the pw is updated so the encrypted one does not get replaced
 		System.out.println("the pw " + getSecurePassword("password") + "\nDB pw " + account.getPassword());
 		accountDao.update(account);
