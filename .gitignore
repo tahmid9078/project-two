@@ -5,9 +5,6 @@ target/
 
 # Log file
 *.log
-#cretentials for hibernate
-/src/main/resources/database.properties
-/src/test/
 
 # BlueJ files
 *.ctxt

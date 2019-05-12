@@ -28,7 +28,7 @@ import com.ttv.services.RoleService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:testApplicationContext.xml")
-public class AccountTest {
+public class AccountServiceTest {
 	
 	List<Account> mockAccounts;
 	Account mockAccount;
@@ -48,8 +48,7 @@ public class AccountTest {
 		mockAccounts = getDummyAccounts();
 		mockAccount = getDummyAccount();
 	}
-	
-	
+		
 	@Test
 	public void testFindAllAccounts() {
 		when(accountService.findAll()).thenReturn(mockAccounts);
@@ -85,7 +84,6 @@ public class AccountTest {
 	
 	@Test
 	public void testDeleteAccount() {
-		
 		Account deleteAccount = mockAccounts.get(1);
 		doAnswer((i) ->{
 			Account a = accountService.findById(i.getArgument(0));
@@ -93,7 +91,6 @@ public class AccountTest {
 			return null;
 		}).when(accountDao).deleteById(deleteAccount.getId());
 	}
-	
 	
 	private List<Account> getDummyAccounts() {
 		Account a1 = new Account((long)1, "username1", "password1", "firstName1", "lastName1", "email1", new Role((long)1 , "role1"));
