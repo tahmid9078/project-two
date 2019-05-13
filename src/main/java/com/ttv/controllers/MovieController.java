@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ttv.models.MovieShowTime;
 import com.ttv.models.Tmdb;
+import com.ttv.services.MovieShowTimeService;
 import com.ttv.services.TmdbService;
 
 @CrossOrigin(origins = "*", allowedHeaders="*")
@@ -24,6 +26,9 @@ public class MovieController {
 	
 	@Autowired
 	TmdbService tmdbService;
+	
+	@Autowired
+	MovieShowTimeService movieShowTimeService;
 	
 	@GetMapping("/all")
 	public List<Tmdb> getAllMovies() {
@@ -36,12 +41,15 @@ public class MovieController {
 	}
 	
 	@PostMapping("")
-	public Map<String, Boolean> insertMovie(@RequestBody Tmdb tmdb) {
-		if(tmdbService.verify(tmdb)) {
-			tmdbService.add(tmdb);
+	public Map<String, Boolean> insertMovie(@RequestBody MovieShowTime movieShowTime) {
+		if(movieShowTimeService.exists(movieShowTime)) {
+			movieShowTimeService.add(movieShowTime);
+			if(tmdbService.exists(movieShowTime.getMovie()) == false) {
+				tmdbService.add(movieShowTime.getMovie());
+			}
 			return Collections.singletonMap("success", true);
 		}
-		return Collections.singletonMap("success", false);
+		return Collections.singletonMap("success", false);	
 	}
 	
 	@DeleteMapping("/delete/{id}")

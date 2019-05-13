@@ -34,4 +34,16 @@ public class MovieShowTimeService {
 		movieShowTimeDao.deleteById(id);
 	}
 	
+	public Boolean exists(MovieShowTime movieShowTime) {
+		List<MovieShowTime> mstList = movieShowTimeDao.findAll();
+		for(MovieShowTime mst : mstList) {
+			if(mst.getMovie().getId().equals(movieShowTime.getId()) 
+					&& mst.getMovieTime().equals(movieShowTime.getMovieTime())) {
+				return true;
+			}
+		}
+		return false;
+		
+	}
+	
 }

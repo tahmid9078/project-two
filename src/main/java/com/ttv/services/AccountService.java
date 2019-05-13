@@ -27,6 +27,7 @@ public class AccountService {
 		account.setPassword(encryptedPW);
 		Role role = roleService.findById((long)1);
 		account.setRole(role);
+		
 		return accountDao.add(account);
 	}
 
