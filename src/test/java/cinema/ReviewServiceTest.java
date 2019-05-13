@@ -3,6 +3,7 @@ package cinema;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
@@ -46,22 +47,21 @@ public class ReviewServiceTest {
 	
 	@Test
 	public void testGetAllReviews() {
-		when(reviewService.findAll()).thenReturn(mockReviews);
-		List<Review> accounts = reviewService.findAll();
-		assertEquals(3, accounts.size());
+		when(reviewDao.findAll()).thenReturn(mockReviews);
+		List<Review> roles = reviewService.findAll();
+		assertEquals(3, roles.size());
 	}
 	
 	@Test
 	public void testAddReview() {
-		
-		when(reviewService.add(mockReview)).thenReturn(mockReview);
+		when(reviewDao.add(mockReview)).thenReturn(mockReview);
 		Review review = reviewService.add(mockReview);
 		assertEquals((long) 1, (long)review.getId());
 	}
 	
 	@Test
 	public void testFindReviewById() {
-		when(reviewService.findById(mockReview.getId())).thenReturn(mockReview);
+		when(reviewDao.findById(mockReview.getId())).thenReturn(mockReview);
 		Review review = reviewService.findById((long)1);
 		assertEquals((long) 1, (long)review.getId());
 	}
@@ -80,13 +80,14 @@ public class ReviewServiceTest {
 	}
 	
 	@Test
-	public void testDeleteAccount() {
+	public void testDeleteReview() {
 		Review deleteReview = mockReviews.get(1);
 		doAnswer((i) ->{
 			Review a = reviewService.findById(i.getArgument(0));
 			assertNull(a);
 			return null;
 		}).when(reviewDao).deleteById(deleteReview.getId());
+		reviewService.deleteById(deleteReview.getId());
 	}
 	
 	private List<Review> getMockReviews() {

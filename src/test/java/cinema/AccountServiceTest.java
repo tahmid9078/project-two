@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -16,8 +14,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -41,7 +40,7 @@ public class AccountServiceTest {
 	private AccountDao accountDao;
 	
 	@Mock
-	private RoleService roleSerivce;
+	private RoleService roleService;
 	
 	@Before
 	public void setUp() {
@@ -52,7 +51,7 @@ public class AccountServiceTest {
 		
 	@Test
 	public void testFindAllAccounts() {
-		when(accountService.findAll()).thenReturn(mockAccounts);
+		when(accountDao.findAll()).thenReturn(mockAccounts);
 		List<Account> accounts = accountService.findAll();
 		assertEquals(3, accounts.size());
 	}
@@ -60,7 +59,8 @@ public class AccountServiceTest {
 	@Test
 	public void testAddAccount() {
 		Account mock = new Account((long)2, "username", "password", "firstName", "lastName", "email", null);
-		when(accountService.add(mock)).thenReturn(mock.getId());
+		when(accountDao.add(mock)).thenReturn(mock.getId());
+		when(roleService.findById((long)1)).thenReturn(new Role((long)1 , "role1"));
 		long id = accountService.add(mock);
 		assertEquals((long) 2, id);
 	}
@@ -68,20 +68,22 @@ public class AccountServiceTest {
 	@Test
 	public void testFindAccountById() {
 		Account a2 = new Account((long)2, "username2", "password2", "firstName2", "lastName2", "email2", new Role((long)2 , "role2"));
-		when(accountService.findById((long)2)).thenReturn(a2);
+		when(accountDao.findById((long)2)).thenReturn(a2);
 		Account account = accountService.findById((long)2);
 		assertEquals((long) 2, (long) account.getId());
 	}
 	
 	@Test
 	public void testUpdateAccount() {
-		Account a2 = new Account((long)2, "usernameUpdate", "password2", "firstName2", "lastName2", "email2", new Role((long)2 , "role2"));
-		doAnswer((i) ->{
+		Account a2 = new Account((long)2, "username2", "password2", "firstName2", "lastName2", "email2", new Role((long)2 , "role2"));
+		when(accountDao.findById((long)2)).thenReturn(a2);
+		a2.setUsername("usernameUpdate");
+		doAnswer((i)->{
 			Account a = i.getArgument(0);
 			assertTrue("usernameUpdate".equals(a.getUsername()));
 			return null;
 		}).when(accountDao).update(a2);
-		
+		accountService.update(a2);
 	}
 	
 	@Test
@@ -92,6 +94,7 @@ public class AccountServiceTest {
 			assertNull(a);
 			return null;
 		}).when(accountDao).deleteById(deleteAccount.getId());
+		accountService.deleteById(deleteAccount.getId());
 	}
 	
 	private List<Account> getDummyAccounts() {
