@@ -15,6 +15,7 @@ public class MovieShowTimeService {
 	private MovieShowTimeDao movieShowTimeDao;
 	
 	public MovieShowTime add(MovieShowTime movieShowTime) {
+
 		return movieShowTimeDao.add(movieShowTime);
 	}
 

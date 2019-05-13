@@ -42,14 +42,14 @@ public class MovieController {
 	
 	@PostMapping("")
 	public Map<String, Boolean> insertMovie(@RequestBody MovieShowTime movieShowTime) {
-		if(movieShowTimeService.exists(movieShowTime)) {
+		if(!movieShowTimeService.exists(movieShowTime)) {
 			movieShowTimeService.add(movieShowTime);
-			if(tmdbService.exists(movieShowTime.getMovie()) == false) {
+			if(!tmdbService.exists(movieShowTime.getMovie())) {
 				tmdbService.add(movieShowTime.getMovie());
 			}
 			return Collections.singletonMap("success", true);
 		}
-		return Collections.singletonMap("success", false);	
+		return Collections.singletonMap("success", false);
 	}
 	
 	@DeleteMapping("/delete/{id}")

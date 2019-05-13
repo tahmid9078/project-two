@@ -32,7 +32,7 @@ public class Account {
 	@Column(name = "a_last_name")
 	private String lastName;
 	
-	@Column(name = "a_email")
+	@Column(name = "a_email", unique = true)
 	private String email;
 	
 	@ManyToOne

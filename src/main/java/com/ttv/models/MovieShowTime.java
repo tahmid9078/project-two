@@ -1,16 +1,20 @@
 package com.ttv.models;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "MOVIESHOWTIME")
 public class MovieShowTime {
 	
 	@Id
@@ -24,19 +28,19 @@ public class MovieShowTime {
 	private Tmdb movie;
 	
 	@Column(name = "st_movie_time")
-	private Date movieTime;
+	private Timestamp movieTime;
 	
 	public MovieShowTime() {
 	}
 
-	public MovieShowTime(Long id, Tmdb movie, Date movieTime) {
+	public MovieShowTime(Long id, Tmdb movie, Timestamp movieTime) {
 		super();
 		Id = id;
 		this.movie = movie;
 		this.movieTime = movieTime;
 	}
 
-	public MovieShowTime(Tmdb movie, Date movieTime) {
+	public MovieShowTime(Tmdb movie, Timestamp movieTime) {
 		super();
 		this.movie = movie;
 		this.movieTime = movieTime;
@@ -58,11 +62,11 @@ public class MovieShowTime {
 		this.movie = movie;
 	}
 
-	public Date getMovieTime() {
+	public Timestamp getMovieTime() {
 		return movieTime;
 	}
 
-	public void setMovieTime(Date movieTime) {
+	public void setMovieTime(Timestamp movieTime) {
 		this.movieTime = movieTime;
 	}
 

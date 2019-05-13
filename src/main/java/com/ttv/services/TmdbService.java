@@ -35,6 +35,7 @@ public class TmdbService {
 	
 	public Boolean exists(Tmdb tmdb) {
 		List<Tmdb> tmdbList = tmdbDao.findAll();
+		if(tmdbList == null) { return false; }
 		for(Tmdb tmdbIndex : tmdbList) {
 			if(tmdbIndex.getMovieApiId().equals(tmdb.getMovieApiId())) {
 				return true;
