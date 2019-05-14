@@ -1,10 +1,7 @@
 package com.ttv.services;
 
-import static util.PasswordHashing.*;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.security.SecureRandom;
+import static util.PasswordHashing.getSecurePassword;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
