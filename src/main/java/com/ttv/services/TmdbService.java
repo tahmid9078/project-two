@@ -33,9 +33,24 @@ public class TmdbService {
 		tmdbDao.deleteById(id);
 	}
 	
-	public Boolean verify(Tmdb tmdb) {
-		Boolean verify = (tmdb.getMovieApiId() != null)? true: false;
-		return verify;
+	public Tmdb findIdByApiId(String apiId) {
+		List<Tmdb> tmdbList = tmdbDao.findAll();
+		for(Tmdb tmdbIndex : tmdbList) {
+			if(tmdbIndex.getMovieApiId().equals(apiId)) {
+				return tmdbIndex;
+			}
+		}
+		return null;
+	}
+	
+	public Boolean exists(Tmdb tmdb) {
+		List<Tmdb> tmdbList = tmdbDao.findAll();
+		for(Tmdb tm : tmdbList) {
+			if(tm.getMovieApiId().equals(tmdb.getMovieApiId())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

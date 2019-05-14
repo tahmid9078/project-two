@@ -23,10 +23,10 @@ public class ReviewService {
 		return reviewDao.findAll();
 	}
 	
-	public List<Review> findAllByMovieId(long movie_id) {
+	public List<Review> findAllByMovieId(String movie_id) {
 		List<Review> reviews = new ArrayList<>();
 		for(Review review : reviewDao.findAll()) {
-			if(review.getMovie().equals(movie_id)) {
+			if(review.getMovie().getMovieApiId().equals(movie_id)) {
 				reviews.add(review);
 			}
 		}
