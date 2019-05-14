@@ -33,12 +33,24 @@ public class TmdbService {
 		tmdbDao.deleteById(id);
 	}
 	
+	public Tmdb findIdByApiId(String apiId) {
+		List<Tmdb> tmdbList = tmdbDao.findAll();
+		for(Tmdb tmdbIndex : tmdbList) {
+			if(tmdbIndex.getMovieApiId().equals(apiId)) {
+				return tmdbIndex;
+			}
+		}
+		return null;
+	}
+	
 	public Boolean exists(Tmdb tmdb) {
 		List<Tmdb> tmdbList = tmdbDao.findAll();
-		if(tmdbList == null) { return false; }
-		for(Tmdb tmdbIndex : tmdbList) {
-			if(tmdbIndex.getMovieApiId().equals(tmdb.getMovieApiId())) {
-				return true;
+		if(tmdbList != null) {
+			for(Tmdb tmdbIndex : tmdbList) {
+				System.out.println( tmdbIndex.getMovieApiId()+"  "+tmdb.getMovieApiId()+" == "+tmdbIndex.getMovieApiId().equals(tmdb.getMovieApiId()));
+				if(tmdbIndex.getMovieApiId().equals(tmdb.getMovieApiId())) {
+					return true;
+				}
 			}
 		}
 		return false;

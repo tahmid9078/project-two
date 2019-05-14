@@ -7,12 +7,15 @@ import org.springframework.stereotype.Service;
 
 import com.ttv.daos.MovieShowTimeDao;
 import com.ttv.models.MovieShowTime;
+import com.ttv.models.Tmdb;
 
 @Service
 public class MovieShowTimeService {
 	
 	@Autowired
 	private MovieShowTimeDao movieShowTimeDao;
+	@Autowired
+	private TmdbService tmdbService;
 	
 	public MovieShowTime add(MovieShowTime movieShowTime) {
 
@@ -37,10 +40,15 @@ public class MovieShowTimeService {
 	
 	public Boolean exists(MovieShowTime movieShowTime) {
 		List<MovieShowTime> mstList = movieShowTimeDao.findAll();
-		for(MovieShowTime mst : mstList) {
-			if(mst.getMovie().getId().equals(movieShowTime.getId()) 
-					&& mst.getMovieTime().equals(movieShowTime.getMovieTime())) {
-				return true;
+		Tmdb movie = tmdbService.findIdByApiId(movieShowTime.getMovie().getMovieApiId());
+		if(movie != null) {
+			for(MovieShowTime mst : mstList) {
+				System.out.println(mst.getMovie().getId()+"   " + movieShowTime.getId() 
+				+ mst.getMovie().getId().equals(movie.getId()));
+				if(mst.getMovie().getId().equals(movie.getId()) 
+						&& mst.getMovieTime().equals(movieShowTime.getMovieTime())) {
+					return true;
+				}
 			}
 		}
 		return false;

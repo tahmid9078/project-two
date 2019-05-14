@@ -9,7 +9,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name= "TMDB")
+@Table(name= "Tmdb")
 public class Tmdb {
 	
 	@Id
@@ -18,7 +18,7 @@ public class Tmdb {
 	@GeneratedValue(generator="tm_seq", strategy=GenerationType.SEQUENCE)
 	private Long Id;
 	
-	@Column(name = "tm_movie_api_id", unique=true)
+	@Column(name = "tm_movie_api_id")
 	private String movieApiId;
 
 	public Tmdb() {
