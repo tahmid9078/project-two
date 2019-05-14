@@ -43,10 +43,10 @@ public class MovieController {
 	@PostMapping("")
 	public Map<String, Boolean> insertMovie(@RequestBody MovieShowTime movieShowTime) {
 		if(!tmdbService.exists(movieShowTime.getMovie())) {
-			tmdbService.add(movieShowTime.getMovie());
-		}
+			Tmdb t = tmdbService.add(movieShowTime.getMovie());	
+			System.out.println("It doesn't exist!");
+		} 
 		if(!movieShowTimeService.exists(movieShowTime)) {
-			System.out.println(movieShowTime);
 			movieShowTimeService.add(movieShowTime);
 			return Collections.singletonMap("success", true);
 		}

@@ -21,6 +21,7 @@ public class Tmdb {
 	@Column(name = "tm_movie_api_id")
 	private String movieApiId;
 
+
 	public Tmdb() {
 	}
 
@@ -51,10 +52,13 @@ public class Tmdb {
 		this.movieApiId = movieApiId;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Tmdb [Id=" + Id + ", movieApiId=" + movieApiId + "]";
 	}
+
+	
 	
 
 }

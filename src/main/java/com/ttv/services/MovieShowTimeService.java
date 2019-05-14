@@ -18,16 +18,14 @@ public class MovieShowTimeService {
 	private TmdbService tmdbService;
 	
 	public MovieShowTime add(MovieShowTime movieShowTime) {
-
+		Tmdb t = tmdbService.findIdByApiId(movieShowTime.getMovie().getMovieApiId());
+		movieShowTime.setMovie(t);
 		return movieShowTimeDao.add(movieShowTime);
 	}
 
 	public List<MovieShowTime> findAll() {
 		List<MovieShowTime> movieShowTimeList = movieShowTimeDao.findAll();
-		//get all api_id by the tmdb_id
-		for(MovieShowTime movieShowTime : movieShowTimeList) {
-			movieShowTime.setMovie(tmdbService.findById(movieShowTime.getMovie().getId()));
-		}
+
 		return movieShowTimeList;
 	}
 
@@ -46,16 +44,11 @@ public class MovieShowTimeService {
 	}
 	
 	public Boolean exists(MovieShowTime movieShowTime) {
-		List<MovieShowTime> mstList = movieShowTimeDao.findAll();
+		List<MovieShowTime> movieShowTimeList = movieShowTimeDao.findAll();
 		Tmdb movie = tmdbService.findIdByApiId(movieShowTime.getMovie().getMovieApiId());
-		if(movie != null) {
-			for(MovieShowTime mst : mstList) {
-				System.out.println(mst.getMovie().getId()+"   " + movieShowTime.getId() 
-				+ mst.getMovie().getId().equals(movie.getId()));
-				if(mst.getMovie().getId().equals(movie.getId()) 
-						&& mst.getMovieTime().equals(movieShowTime.getMovieTime())) {
-					return true;
-				}
+		for(MovieShowTime mst : movieShowTimeList) {
+			if(mst.getMovie().getMovieApiId().equals(movie.getMovieApiId()) && mst.getMovieTime().equals(movieShowTime.getMovieTime())) {
+				return true;
 			}
 		}
 		return false;

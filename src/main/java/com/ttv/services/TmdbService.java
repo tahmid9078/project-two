@@ -45,12 +45,9 @@ public class TmdbService {
 	
 	public Boolean exists(Tmdb tmdb) {
 		List<Tmdb> tmdbList = tmdbDao.findAll();
-		if(tmdbList != null) {
-			for(Tmdb tmdbIndex : tmdbList) {
-				System.out.println( tmdbIndex.getMovieApiId()+"  "+tmdb.getMovieApiId()+" == "+tmdbIndex.getMovieApiId().equals(tmdb.getMovieApiId()));
-				if(tmdbIndex.getMovieApiId().equals(tmdb.getMovieApiId())) {
-					return true;
-				}
+		for(Tmdb tm : tmdbList) {
+			if(tm.getMovieApiId().equals(tmdb.getMovieApiId())) {
+				return true;
 			}
 		}
 		return false;
