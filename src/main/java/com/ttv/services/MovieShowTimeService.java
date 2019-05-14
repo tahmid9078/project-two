@@ -1,5 +1,6 @@
 package com.ttv.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,19 @@ public class MovieShowTimeService {
 			}
 		}
 		return false;
-		
+	}
+	
+	public List<MovieShowTime> getAllShowTimeByApiId(String id) {
+		List<MovieShowTime> mstList = movieShowTimeDao.findAll();
+		List<MovieShowTime> apiMstList = new ArrayList<>();
+		for(MovieShowTime movieShowTime : mstList) {
+			System.out.println(movieShowTime);
+			System.out.println(movieShowTime.getMovie().getMovieApiId().equals(id));
+			if(movieShowTime.getMovie().getMovieApiId().equals(id)) {
+				apiMstList.add(movieShowTime);
+			}
+		}
+		return apiMstList;
 	}
 	
 }

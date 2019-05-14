@@ -30,14 +30,19 @@ public class MovieController {
 	@Autowired
 	MovieShowTimeService movieShowTimeService;
 	
-	@GetMapping("/all")
-	public List<MovieShowTime> getAllMovies() {
-		return movieShowTimeService.findAll();
+	@GetMapping("/tmdb/all")
+	public List<Tmdb> getAllMovies() {
+		return tmdbService.findAll();
 	}
-		
+	
+	@GetMapping("/showtime/{id}")
+	public List<MovieShowTime> getMovieShowsByApiId(@PathVariable String id) {
+		return movieShowTimeService.getAllShowTimeByApiId(id);
+	}
+	
 	@GetMapping("/{id}")
-	public MovieShowTime getMovieById(@PathVariable Long id) {
-		return movieShowTimeService.findById(id);
+	public Tmdb getMovieById(@PathVariable Long id) {
+		return tmdbService.findById(id);
 	}
 	
 	@PostMapping("")

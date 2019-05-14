@@ -17,10 +17,16 @@ public class TicketService {
 	private AccountService accountService;
 	@Autowired
 	private MovieShowTimeService movieShowTimeService;
+	@Autowired
+	private TicketTypeService ticketTypeService;
 	
 	public Ticket add(Ticket ticket) {
 		ticket.setAccount(accountService.findById(ticket.getAccount().getId()));
-//		ticket.setMovieShowTime(movieShowTimeService.findById(id));
+		System.out.println(ticket);
+		ticket.setMovieShowTime(movieShowTimeService.findById(ticket.getMovieShowTime().getId()));
+		System.out.println(ticket);
+		ticket.setTicketType(ticketTypeService.findByName(ticket.getTicketType().getType()));
+		System.out.println(ticket);
 		return ticketDao.add(ticket);
 	}
 

@@ -25,6 +25,15 @@ public class TicketTypeService {
 	public TicketType findById(Long id) {
 		return ticketTypeDao.findById(id);
 	}
+	public TicketType findByName(String ticketName) {
+		List<TicketType> ticketTypes = ticketTypeDao.findAll();
+		for(TicketType ticketType : ticketTypes) {
+			if(ticketType.getType().equals(ticketName)) {
+				return ticketType;
+			}
+		}
+		return null;
+	}
 
 	public void update(TicketType ticketType) {
 		ticketTypeDao.update(ticketType);
@@ -33,4 +42,5 @@ public class TicketTypeService {
 	public void deleteById(Long id) {
 		ticketTypeDao.deleteById(id);
 	}
+	
 }
