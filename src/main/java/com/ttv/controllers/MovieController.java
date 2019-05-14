@@ -31,13 +31,13 @@ public class MovieController {
 	MovieShowTimeService movieShowTimeService;
 	
 	@GetMapping("/all")
-	public List<Tmdb> getAllMovies() {
-		return tmdbService.findAll();
+	public List<MovieShowTime> getAllMovies() {
+		return movieShowTimeService.findAll();
 	}
-	
+		
 	@GetMapping("/{id}")
-	public Tmdb getMovieById(@PathVariable Long id) {
-		return tmdbService.findById(id);
+	public MovieShowTime getMovieById(@PathVariable Long id) {
+		return movieShowTimeService.findById(id);
 	}
 	
 	@PostMapping("")

@@ -23,11 +23,18 @@ public class MovieShowTimeService {
 	}
 
 	public List<MovieShowTime> findAll() {
-		return movieShowTimeDao.findAll();
+		List<MovieShowTime> movieShowTimeList = movieShowTimeDao.findAll();
+		//get all api_id by the tmdb_id
+		for(MovieShowTime movieShowTime : movieShowTimeList) {
+			movieShowTime.setMovie(tmdbService.findById(movieShowTime.getMovie().getId()));
+		}
+		return movieShowTimeList;
 	}
 
 	public MovieShowTime findById(Long id) {
-		return movieShowTimeDao.findById(id);
+		MovieShowTime movieShowTime = movieShowTimeDao.findById(id);
+		movieShowTime.setMovie(tmdbService.findById(movieShowTime.getMovie().getId()));
+		return movieShowTime;
 	}
 
 	public void update(MovieShowTime movieShowTime) {
