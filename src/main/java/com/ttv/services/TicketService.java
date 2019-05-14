@@ -13,8 +13,14 @@ public class TicketService {
 	
 	@Autowired
 	private TicketDao ticketDao;
+	@Autowired
+	private AccountService accountService;
+	@Autowired
+	private MovieShowTimeService movieShowTimeService;
 	
 	public Ticket add(Ticket ticket) {
+		ticket.setAccount(accountService.findById(ticket.getAccount().getId()));
+//		ticket.setMovieShowTime(movieShowTimeService.findById(id));
 		return ticketDao.add(ticket);
 	}
 

@@ -1,7 +1,5 @@
 package com.ttv.models;
 
-import java.sql.Timestamp;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,19 +26,19 @@ public class MovieShowTime {
 	private Tmdb movie;
 	
 	@Column(name = "st_movie_time")
-	private Timestamp movieTime;
+	private String movieTime;
 	
 	public MovieShowTime() {
 	}
 
-	public MovieShowTime(Long id, Tmdb movie, Timestamp movieTime) {
+	public MovieShowTime(Long id, Tmdb movie, String movieTime) {
 		super();
 		Id = id;
 		this.movie = movie;
 		this.movieTime = movieTime;
 	}
 
-	public MovieShowTime(Tmdb movie, Timestamp movieTime) {
+	public MovieShowTime(Tmdb movie, String movieTime) {
 		super();
 		this.movie = movie;
 		this.movieTime = movieTime;
@@ -62,11 +60,11 @@ public class MovieShowTime {
 		this.movie = movie;
 	}
 
-	public Timestamp getMovieTime() {
+	public String getMovieTime() {
 		return movieTime;
 	}
 
-	public void setMovieTime(Timestamp movieTime) {
+	public void setMovieTime(String movieTime) {
 		this.movieTime = movieTime;
 	}
 
