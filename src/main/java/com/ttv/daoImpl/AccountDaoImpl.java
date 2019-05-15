@@ -23,9 +23,9 @@ public class AccountDaoImpl implements AccountDao {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public Account add(Account account) {
+	public Long add(Account account) {
 		Session session = sessionFactory.getCurrentSession();
-		return (Account) session.save(account);
+		return (Long) session.save(account);
 		
 	}
 
