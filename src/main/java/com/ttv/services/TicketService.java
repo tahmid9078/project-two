@@ -30,7 +30,6 @@ public class TicketService {
 		Account account = accountService.findById(ticket.getAccount().getId());
 		TicketType ticketType = ticketTypeService.findByName(ticket.getTicketType().getType());
 		Tmdb movie = tmdbService.findIdByApiId(ticket.getMovie().getMovieApiId());
-		
 		if(account != null && ticketType != null && movie != null) {
 			ticket.setAccount(account);
 			ticket.setTicketType(ticketType);
@@ -77,6 +76,11 @@ public class TicketService {
 				|| ticket.getAccount() == null) {
 			return false;
 		} else {
+			try {
+				Long.parseLong(ticket.getPaymentCardNumber());
+			} catch (NumberFormatException e) {
+				return false;
+			}
 			return true;
 		}
 	}

@@ -1,6 +1,6 @@
 package com.ttv.services;
 
-import static util.PasswordHashing.getSecurePassword;
+import static com.ttv.util.PasswordHashing.getSecurePassword;
 
 import java.util.List;
 
@@ -16,6 +16,7 @@ public class AccountService {
 
 	@Autowired
 	private AccountDao accountDao;
+	
 	@Autowired
 	private RoleService roleService;
 
@@ -63,6 +64,7 @@ public class AccountService {
 		}
 		return false;
 	}
+	
 	public boolean verifyRegistration(Account account) {
 		if(account.getUsername() == "" || account.getPassword() == ""
 				|| account.getUsername() == null || account.getPassword() == null
