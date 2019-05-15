@@ -59,10 +59,10 @@ public class AccountServiceTest {
 	@Test
 	public void testAddAccount() {
 		Account mock = new Account((long)2, "username", "password", "firstName", "lastName", "email", null);
-		when(accountDao.add(mock)).thenReturn(mock.getId());
+		when(accountDao.add(mock)).thenReturn(mock);
 		when(roleService.findById((long)1)).thenReturn(new Role((long)1 , "role1"));
-		long id = accountService.add(mock);
-		assertEquals((long) 2, id);
+		Account account = accountService.add(mock);
+		assertEquals((long) 2, (long)account.getId());
 	}
 	
 	@Test
