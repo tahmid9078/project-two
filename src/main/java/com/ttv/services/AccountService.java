@@ -64,6 +64,7 @@ public class AccountService {
 		return false;
 	}
 	public boolean verifyRegistration(Account account) {
+		
 		List<Account> aList = accountDao.findAll();
 		for(Account a : aList) {
 			//compare to see if account username match an account in the DB
