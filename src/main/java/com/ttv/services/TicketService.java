@@ -1,5 +1,6 @@
 package com.ttv.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,7 @@ public class TicketService {
 	private TicketTypeService ticketTypeService;
 	
 	public Ticket add(Ticket ticket) {
-		System.out.println(ticket.getId());
-		System.out.println(ticket.getMovie());
+		System.out.println(ticket);
 		ticket.setAccount(accountService.findById(ticket.getAccount().getId()));
 		ticket.setTicketType(ticketTypeService.findByName(ticket.getTicketType().getType()));
 		ticket.setMovie(tmdbService.findIdByApiId(ticket.getMovie().getMovieApiId()));
@@ -45,5 +45,17 @@ public class TicketService {
 
 	public void deleteById(Long id) {
 		ticketDao.deleteById(id);
+	}
+	
+	public List<Ticket> getAllTicketsByAccountId(Long id) {
+		List<Ticket> tickets = ticketDao.findAll();
+		List<Ticket> accTickets = new ArrayList<>();
+		for(Ticket ticket : tickets) {
+			if(ticket.getAccount().getId().equals(id)) {
+				accTickets.add(ticket);
+			}
+		}
+		return accTickets;
+		
 	}
 }
