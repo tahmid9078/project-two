@@ -31,7 +31,7 @@ public class TicketController {
 		if(returnedTicket != null) {
 			return Collections.singletonMap("success", true);
 		}
-		return Collections.singletonMap("success", true);
+		return Collections.singletonMap("success", false);
 	}
 	
 	@GetMapping("/all")
