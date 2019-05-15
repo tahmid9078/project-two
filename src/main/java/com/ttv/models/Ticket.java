@@ -24,44 +24,35 @@ public class Ticket {
 	@JoinColumn(name = "t_account")
 	private Account account;
 		
-	@ManyToOne
-	@JoinColumn(name = "t_movie_showtime")
-	private MovieShowTime movieShowTime;
+	@Column(name="t_movieShowTime")
+	private String movieShowTime;
 	
 	@Column(name = "t_payment_card_number")
 	private String paymentCardNumber;
 	
-	@Column(name = "t_status")
-	private String status;
-	
-	@Column(name = "t_seat_number")
-	private String seatNumber;
-	
 	@ManyToOne
 	@JoinColumn(name = "t_ticket_type")
 	private TicketType ticketType;
-	
+
 	public Ticket() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public Ticket(Long id, Account account, MovieShowTime movieShowTime, String paymentCardNumber, String status,
-			TicketType ticketType) {
+	public Ticket(Long id, Account account, String movieShowTime, String paymentCardNumber, TicketType ticketType) {
 		super();
 		Id = id;
 		this.account = account;
 		this.movieShowTime = movieShowTime;
 		this.paymentCardNumber = paymentCardNumber;
-		this.status = status;
 		this.ticketType = ticketType;
 	}
 
-	public Ticket(Account account, MovieShowTime movieShowTime, String paymentCardNumber, String status,
-			TicketType ticketType) {
+	public Ticket(Account account, String movieShowTime, String paymentCardNumber, TicketType ticketType) {
 		super();
 		this.account = account;
 		this.movieShowTime = movieShowTime;
 		this.paymentCardNumber = paymentCardNumber;
-		this.status = status;
 		this.ticketType = ticketType;
 	}
 
@@ -81,11 +72,11 @@ public class Ticket {
 		this.account = account;
 	}
 
-	public MovieShowTime getMovieShowTime() {
+	public String getMovieShowTime() {
 		return movieShowTime;
 	}
 
-	public void setMovieShowTime(MovieShowTime movieShowTime) {
+	public void setMovieShowTime(String movieShowTime) {
 		this.movieShowTime = movieShowTime;
 	}
 
@@ -95,14 +86,6 @@ public class Ticket {
 
 	public void setPaymentCardNumber(String paymentCardNumber) {
 		this.paymentCardNumber = paymentCardNumber;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 	public TicketType getTicketType() {
@@ -116,7 +99,9 @@ public class Ticket {
 	@Override
 	public String toString() {
 		return "Ticket [Id=" + Id + ", account=" + account + ", movieShowTime=" + movieShowTime + ", paymentCardNumber="
-				+ paymentCardNumber + ", status=" + status + ", ticketType=" + ticketType + "]";
+				+ paymentCardNumber + ", ticketType=" + ticketType + "]";
 	}
+	
+	
 
 }

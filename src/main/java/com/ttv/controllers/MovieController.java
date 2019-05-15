@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,12 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ttv.models.MovieShowTime;
 import com.ttv.models.Tmdb;
-import com.ttv.services.MovieShowTimeService;
 import com.ttv.services.TmdbService;
 
-@CrossOrigin(origins = "*", allowedHeaders="*")
 @RestController
 @RequestMapping("/movie")
 public class MovieController {
@@ -27,42 +23,29 @@ public class MovieController {
 	@Autowired
 	TmdbService tmdbService;
 	
-	@Autowired
-	MovieShowTimeService movieShowTimeService;
-	
-	@GetMapping("/tmdb/all")
-	public List<Tmdb> getAllMovies() {
-		return tmdbService.findAll();
-	}
-	
-	@GetMapping("/showtime/{id}")
-	public List<MovieShowTime> getMovieShowsByApiId(@PathVariable String id) {
-		return movieShowTimeService.getAllShowTimeByApiId(id);
-	}
-	
-	@GetMapping("/{id}")
-	public Tmdb getMovieById(@PathVariable Long id) {
-		return tmdbService.findById(id);
-	}
-	
-	@PostMapping("")
-	public Map<String, Boolean> insertMovie(@RequestBody MovieShowTime movieShowTime) {
-		if(!tmdbService.exists(movieShowTime.getMovie())) {
-			Tmdb t = tmdbService.add(movieShowTime.getMovie());	
-			System.out.println("It doesn't exist!");
-		} 
-		if(!movieShowTimeService.exists(movieShowTime)) {
-			movieShowTimeService.add(movieShowTime);
+	@PostMapping("") 
+	public Map<String, Boolean> insertMovie(@RequestBody Tmdb movie) {
+		if(!tmdbService.exists(movie)) {
+			tmdbService.add(movie);
 			return Collections.singletonMap("success", true);
 		}
 		return Collections.singletonMap("success", false);
 	}
 	
-	@DeleteMapping("/delete/{id}")
-	public Map<String, Boolean> deleteMovieById(@PathVariable Long id) {
-		tmdbService.deleteById(id);
-		return Collections.singletonMap("Success", true);
+	@GetMapping("/all")
+	public List<Tmdb> findAllTmdb() {
+		return tmdbService.findAll();
 	}
 	
-
+	@GetMapping("/{id}")
+	public Tmdb getMovieById(@PathVariable long id) {
+		return tmdbService.findById(id);
+	}
+	
+	@DeleteMapping("/delete/{id}")
+	public void deleteTmdb(@RequestBody Tmdb movie) {
+		if(tmdbService.exists(movie)) {
+			tmdbService.deleteById(movie.getId());
+		}
+	}
 }

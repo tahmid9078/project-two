@@ -15,15 +15,12 @@ public class TicketService {
 	private TicketDao ticketDao;
 	@Autowired
 	private AccountService accountService;
-	@Autowired
-	private MovieShowTimeService movieShowTimeService;
+
 	@Autowired
 	private TicketTypeService ticketTypeService;
 	
 	public Ticket add(Ticket ticket) {
 		ticket.setAccount(accountService.findById(ticket.getAccount().getId()));
-		System.out.println(ticket);
-		ticket.setMovieShowTime(movieShowTimeService.findById(ticket.getMovieShowTime().getId()));
 		System.out.println(ticket);
 		ticket.setTicketType(ticketTypeService.findByName(ticket.getTicketType().getType()));
 		System.out.println(ticket);
