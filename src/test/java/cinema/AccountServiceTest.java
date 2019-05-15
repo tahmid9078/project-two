@@ -15,8 +15,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -59,10 +57,10 @@ public class AccountServiceTest {
 	@Test
 	public void testAddAccount() {
 		Account mock = new Account((long)2, "username", "password", "firstName", "lastName", "email", null);
-		when(accountDao.add(mock)).thenReturn(mock);
+		when(accountDao.add(mock)).thenReturn(mock.getId());
 		when(roleService.findById((long)1)).thenReturn(new Role((long)1 , "role1"));
-		Account account = accountService.add(mock);
-		assertEquals((long) 2, (long)account.getId());
+		long id = accountService.add(mock);
+		assertEquals((long) 2, id);
 	}
 	
 	@Test
@@ -96,6 +94,7 @@ public class AccountServiceTest {
 		}).when(accountDao).deleteById(deleteAccount.getId());
 		accountService.deleteById(deleteAccount.getId());
 	}
+	
 	
 	private List<Account> getDummyAccounts() {
 		Account a1 = new Account((long)1, "username1", "password1", "firstName1", "lastName1", "email1", new Role((long)1 , "role1"));
