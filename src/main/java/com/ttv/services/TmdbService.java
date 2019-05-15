@@ -35,7 +35,9 @@ public class TmdbService {
 	
 	public Tmdb findIdByApiId(String apiId) {
 		List<Tmdb> tmdbList = tmdbDao.findAll();
+		//loop through each object in the arrayList to find if there are any matches
 		for(Tmdb tmdbIndex : tmdbList) {
+			//if there is a match then return the object
 			if(tmdbIndex.getMovieApiId().equals(apiId)) {
 				return tmdbIndex;
 			}
@@ -45,7 +47,9 @@ public class TmdbService {
 	
 	public Boolean exists(Tmdb tmdb) {
 		List<Tmdb> tmdbList = tmdbDao.findAll();
+		//loop through each object and look for a match
 		for(Tmdb tm : tmdbList) {
+			//if there is a match then return true that it exists in the DB
 			if(tm.getMovieApiId().equals(tmdb.getMovieApiId())) {
 				return true;
 			}

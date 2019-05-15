@@ -23,7 +23,7 @@ public class TicketService {
 	private TicketTypeService ticketTypeService;
 	
 	public Ticket add(Ticket ticket) {
-		System.out.println(ticket);
+		//find and set the account, ticketType, and movie based on Id, Name, and ApiId
 		ticket.setAccount(accountService.findById(ticket.getAccount().getId()));
 		ticket.setTicketType(ticketTypeService.findByName(ticket.getTicketType().getType()));
 		ticket.setMovie(tmdbService.findIdByApiId(ticket.getMovie().getMovieApiId()));
@@ -50,6 +50,8 @@ public class TicketService {
 	public List<Ticket> getAllTicketsByAccountId(Long id) {
 		List<Ticket> tickets = ticketDao.findAll();
 		List<Ticket> accTickets = new ArrayList<>();
+		//loop through tickets to find tickets with an account 
+		//	id that matches the id specified
 		for(Ticket ticket : tickets) {
 			if(ticket.getAccount().getId().equals(id)) {
 				accTickets.add(ticket);

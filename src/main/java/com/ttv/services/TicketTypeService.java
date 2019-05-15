@@ -27,6 +27,7 @@ public class TicketTypeService {
 	}
 	public TicketType findByName(String ticketName) {
 		List<TicketType> ticketTypes = ticketTypeDao.findAll();
+		//loop to find the ticketName that matches one in the DB
 		for(TicketType ticketType : ticketTypes) {
 			if(ticketType.getType().equals(ticketName)) {
 				return ticketType;
