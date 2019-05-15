@@ -40,8 +40,8 @@ public class MovieController {
 	}
 	
 	@GetMapping("/{id}")
-	public Tmdb getMovieById(@PathVariable String apiId) {
-		return tmdbService.findIdByApiId(apiId);
+	public Tmdb getMovieById(@PathVariable Long id) {
+		return tmdbService.findById(id);
 	}
 	
 	@DeleteMapping("/delete/{id}")
