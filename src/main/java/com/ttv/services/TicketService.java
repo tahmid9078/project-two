@@ -70,11 +70,11 @@ public class TicketService {
 	}
 	
 	public Boolean verifyTicketSubmittion(Ticket ticket) {
-		if(ticket.getMovie().getMovieApiId().equals("") 
-				|| ticket.getMovieShowTime().equals("") 
-				|| ticket.getPaymentCardNumber().equals("") 
-				|| ticket.getTicketType().getType().equals("") 
-				|| ticket.getAccount().getId() == null) {
+		if(ticket.getMovie() == null 
+				|| ticket.getMovieShowTime() == "" || ticket.getMovieShowTime() == null 
+				|| ticket.getPaymentCardNumber() == "" || ticket.getPaymentCardNumber() == null 
+				|| ticket.getTicketType() == null
+				|| ticket.getAccount() == null) {
 			return false;
 		} else {
 			return true;
