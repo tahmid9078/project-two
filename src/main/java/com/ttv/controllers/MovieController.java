@@ -40,8 +40,13 @@ public class MovieController {
 	}
 	
 	@GetMapping("/{id}")
-	public Tmdb getMovieById(@PathVariable Long id) {
-		return tmdbService.findById(id);
+	public Map<String, Boolean> getMovieById(@PathVariable Long id) {
+		Tmdb tmdb = tmdbService.findById(id);
+		if(tmdb != null) {
+			return Collections.singletonMap("success", true);
+		} else {
+			return Collections.singletonMap("success", false);
+		}
 	}
 	
 	@DeleteMapping("/delete/{id}")
