@@ -19,7 +19,7 @@ public class AccountService {
 	@Autowired
 	private RoleService roleService;
 
-	public Account add(Account account) {
+	public Long add(Account account) {
 		String encryptedPW = getSecurePassword(account.getPassword());
 		account.setPassword(encryptedPW);
 		Role role = roleService.findById((long)1);
