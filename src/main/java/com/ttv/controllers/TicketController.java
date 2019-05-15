@@ -27,9 +27,11 @@ public class TicketController {
 	
 	@PostMapping("")
 	public Map<String, Boolean> insertTicket(@RequestBody Ticket ticket) {
-		Ticket returnedTicket = ticketService.add(ticket);
-		if(returnedTicket != null) {
-			return Collections.singletonMap("success", true);
+		if(ticketService.verifyTicketSubmittion(ticket)) {
+			Ticket returnedTicket = ticketService.add(ticket);
+			if(returnedTicket != null) {
+				return Collections.singletonMap("success", true);
+			}
 		}
 		return Collections.singletonMap("success", false);
 	}

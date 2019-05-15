@@ -64,6 +64,14 @@ public class AccountService {
 		return false;
 	}
 	public boolean verifyRegistration(Account account) {
+		if(account.getUsername() == "" || account.getPassword() == ""
+				|| account.getUsername() == null || account.getPassword() == null
+				|| account.getFirstName() == "" || account.getLastName() == "" 
+				|| account.getFirstName() == null || account.getLastName() == null
+				|| account.getEmail() == "" || account.getEmail() == null) {
+				return false;
+		}
+		
 		
 		List<Account> aList = accountDao.findAll();
 		for(Account a : aList) {
