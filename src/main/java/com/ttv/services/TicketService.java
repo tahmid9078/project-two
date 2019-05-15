@@ -15,13 +15,19 @@ public class TicketService {
 	private TicketDao ticketDao;
 	@Autowired
 	private AccountService accountService;
+	@Autowired
+	private TmdbService tmdbService;
 
 	@Autowired
 	private TicketTypeService ticketTypeService;
 	
 	public Ticket add(Ticket ticket) {
+		System.out.println(ticket.getId());
+		System.out.println(ticket.getMovie());
 		ticket.setAccount(accountService.findById(ticket.getAccount().getId()));
 		ticket.setTicketType(ticketTypeService.findByName(ticket.getTicketType().getType()));
+		ticket.setMovie(tmdbService.findIdByApiId(ticket.getMovie().getMovieApiId()));
+		
 		return ticketDao.add(ticket);
 	}
 

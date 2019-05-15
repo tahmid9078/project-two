@@ -24,6 +24,10 @@ public class Ticket {
 	@JoinColumn(name = "t_account")
 	private Account account;
 		
+	@ManyToOne
+	@JoinColumn(name="t_movie_id")
+	private Tmdb movie;
+	
 	@Column(name="t_movieShowTime")
 	private String movieShowTime;
 	
@@ -39,18 +43,21 @@ public class Ticket {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ticket(Long id, Account account, String movieShowTime, String paymentCardNumber, TicketType ticketType) {
+	public Ticket(Long id, Account account, Tmdb movie, String movieShowTime, String paymentCardNumber,
+			TicketType ticketType) {
 		super();
 		Id = id;
 		this.account = account;
+		this.movie = movie;
 		this.movieShowTime = movieShowTime;
 		this.paymentCardNumber = paymentCardNumber;
 		this.ticketType = ticketType;
 	}
 
-	public Ticket(Account account, String movieShowTime, String paymentCardNumber, TicketType ticketType) {
+	public Ticket(Account account, Tmdb movie, String movieShowTime, String paymentCardNumber, TicketType ticketType) {
 		super();
 		this.account = account;
+		this.movie = movie;
 		this.movieShowTime = movieShowTime;
 		this.paymentCardNumber = paymentCardNumber;
 		this.ticketType = ticketType;
@@ -70,6 +77,14 @@ public class Ticket {
 
 	public void setAccount(Account account) {
 		this.account = account;
+	}
+
+	public Tmdb getMovie() {
+		return movie;
+	}
+
+	public void setMovie(Tmdb movie) {
+		this.movie = movie;
 	}
 
 	public String getMovieShowTime() {
@@ -98,9 +113,11 @@ public class Ticket {
 
 	@Override
 	public String toString() {
-		return "Ticket [Id=" + Id + ", account=" + account + ", movieShowTime=" + movieShowTime + ", paymentCardNumber="
-				+ paymentCardNumber + ", ticketType=" + ticketType + "]";
+		return "Ticket [Id=" + Id + ", account=" + account + ", movie=" + movie + ", movieShowTime=" + movieShowTime
+				+ ", paymentCardNumber=" + paymentCardNumber + ", ticketType=" + ticketType + "]";
 	}
+
+	
 	
 	
 
