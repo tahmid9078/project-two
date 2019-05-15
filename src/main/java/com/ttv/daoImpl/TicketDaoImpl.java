@@ -33,7 +33,6 @@ public class TicketDaoImpl implements TicketDao {
 	public List<Ticket> findAll() {
 		Session session = sessionFactory.getCurrentSession();
 		List<Ticket> tickets = session.createQuery("FROM Ticket").list();
-		session.getTransaction().commit();
 		return tickets;
 	}
 

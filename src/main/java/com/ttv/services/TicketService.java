@@ -21,9 +21,7 @@ public class TicketService {
 	
 	public Ticket add(Ticket ticket) {
 		ticket.setAccount(accountService.findById(ticket.getAccount().getId()));
-		System.out.println(ticket);
 		ticket.setTicketType(ticketTypeService.findByName(ticket.getTicketType().getType()));
-		System.out.println(ticket);
 		return ticketDao.add(ticket);
 	}
 
