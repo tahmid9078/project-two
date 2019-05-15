@@ -40,8 +40,9 @@ public class MovieController {
 	}
 	
 	@GetMapping("/{id}")
-	public Map<String, Boolean> getMovieById(@PathVariable Long id) {
-		Tmdb tmdb = tmdbService.findById(id);
+	public Map<String, Boolean> getMovieById(@PathVariable String id) {
+		System.out.println(id);
+		Tmdb tmdb = tmdbService.findIdByApiId(id);
 		if(tmdb != null) {
 			return Collections.singletonMap("success", true);
 		} else {
