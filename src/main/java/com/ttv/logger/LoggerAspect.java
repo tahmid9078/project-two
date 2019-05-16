@@ -14,8 +14,19 @@ import org.springframework.stereotype.Component;
 public class LoggerAspect {
 	private Logger log;
 	
+//	@Before("everything()")
+//	public void logBefore(JoinPoint jp) {
+//		log = Logger.getLogger(jp.getTarget().getClass());
+//		log.trace("Method with signature: "+jp.getSignature());
+//		log.trace("With Arguments: "+Arrays.toString(jp.getArgs()));
+//	}
+//	@After("everything()")
+//    public void log(JoinPoint jp) {
+//		log = Logger.getLogger(jp.getTarget().getClass());
+//		log.info(jp.getSignature().getName() + " called...");
+//    }
 	@Around("everything()")
-	public Object log(ProceedingJoinPoint pjp) {
+	public Object logAfter(ProceedingJoinPoint pjp) {
 		Object obj = null;
 		
 		log = Logger.getLogger(pjp.getTarget().getClass());
@@ -33,6 +44,6 @@ public class LoggerAspect {
 		return obj;
 	}
 	
-	@Pointcut("execution(* com.ttv.*(..))")
+	@Pointcut("execution(* com.ttv.*.*.*(..))")
 	private void everything() { }
 }

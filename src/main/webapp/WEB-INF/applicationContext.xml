@@ -10,6 +10,7 @@
 	
 	<!-- Scan for Spring beans -->
 	<context:component-scan base-package="com.ttv" />
+	<!-- Enable @AspectJ annotation support  -->
 	<!-- Use annotations for MVC -->
 	<mvc:annotation-driven />
 	<!-- properties file with database credentials -->
