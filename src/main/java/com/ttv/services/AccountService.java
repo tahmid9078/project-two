@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ttv.daos.AccountDao;
 import com.ttv.models.Account;
 import com.ttv.models.Role;
+import com.ttv.models.Ticket;
 
 @Service
 public class AccountService {
@@ -19,6 +20,9 @@ public class AccountService {
 	
 	@Autowired
 	private RoleService roleService;
+	
+	@Autowired
+	private TicketService ticketService;
 
 	public Long add(Account account) {
 		//encryp the password
@@ -50,7 +54,14 @@ public class AccountService {
 	}
 
 	public void deleteById(Long id) {
-		accountDao.deleteById(id);
+		Account account = findById(id);
+		if(account != null) {
+			List<Ticket> tickets = ticketService.getAllTicketsByAccountId(account.getId());
+			for(Ticket ticket : tickets) {
+				ticketService.deleteById(ticket.getId());
+			}
+			accountDao.deleteById(account.getId());
+		}
 	}
 	
 	public boolean verifyAccount(Account account) {
