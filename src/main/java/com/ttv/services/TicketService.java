@@ -69,6 +69,7 @@ public class TicketService {
 	}
 	
 	public Boolean verifyTicketSubmittion(Ticket ticket) {
+		//empty or null verification
 		if(ticket.getMovie() == null 
 				|| ticket.getMovieShowTime() == "" || ticket.getMovieShowTime() == null 
 				|| ticket.getPaymentCardNumber() == "" || ticket.getPaymentCardNumber() == null 
@@ -76,11 +77,13 @@ public class TicketService {
 				|| ticket.getAccount() == null) {
 			return false;
 		} else {
+			//Paymentcard verification
 			try {
 				Long.parseLong(ticket.getPaymentCardNumber());
 			} catch (NumberFormatException e) {
 				return false;
 			}
+			//return true if everything passes
 			return true;
 		}
 	}

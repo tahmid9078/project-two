@@ -51,9 +51,7 @@ public class MovieController {
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public void deleteTmdb(@RequestBody Tmdb movie) {
-		if(tmdbService.exists(movie)) {
-			tmdbService.deleteById(movie.getId());
-		}
+	public void deleteTmdb(@PathVariable String id) {
+		tmdbService.deleteByApiId(id);
 	}
 }
