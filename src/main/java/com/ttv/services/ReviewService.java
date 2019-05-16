@@ -25,6 +25,7 @@ public class ReviewService {
 	
 	public List<Review> findAllByMovieId(String movie_id) {
 		List<Review> reviews = new ArrayList<>();
+		//loop and find the movies with matching movieApiId
 		for(Review review : reviewDao.findAll()) {
 			if(review.getMovie().getMovieApiId().equals(movie_id)) {
 				reviews.add(review);

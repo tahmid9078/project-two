@@ -55,9 +55,8 @@ public class AccountController {
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public Map<String, Boolean> deleteAccountById(@PathVariable Long id) {
+	public void deleteAccountById(@PathVariable Long id) {
 		accountService.deleteById(id);
-		return Collections.singletonMap("Success", true);
 	}
 	
 	@PostMapping("/login") 
